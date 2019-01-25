@@ -1,15 +1,21 @@
 package edu.isu.cs.cs3308.structures.impl;
 
 import edu.isu.cs.cs3308.structures.List;
-import edu.isu.cs.cs3308.structures.Node2;
+import edu.isu.cs.cs3308.structures.Node;
 
-public class DoublyLinkedList<E> implements List<E> {
+/**
+ * A class to implement a singly linked list based off the List class
+ *
+ * @author Aaron Harvey
+ * @param <E> any type of list
+ */
+public class SinglyLinkedList<E> implements List<E> {
 
 	// Head node for the List
-	protected Node2<E> head = null;
+	protected Node<E> head = null;
 
 	// Tail node for the List
-	protected Node2<E> tail = null;
+	protected Node<E> tail = null;
 
 	// Count of the nodes in the List
 	protected int size = 0;
@@ -20,10 +26,10 @@ public class DoublyLinkedList<E> implements List<E> {
 	 * @return true if not null, and false if null
 	 */
 	private boolean checkElement(E element) {
-		// may eventually throw an error or some message
-		// but currently am just doing an error check
-		return (element != null) ? true : false;
-	}
+	    // may eventually throw an error or some message
+        // but currently am just doing an error check
+	    return (element != null) ? true : false;
+    }
 
 	/**
 	 * Checks to see if a given index is within 0 and size
@@ -31,8 +37,8 @@ public class DoublyLinkedList<E> implements List<E> {
 	 * @return true if valid index, and false if invalid
 	 */
 	private boolean checkIndex(int index) {
-		return (index < size && index >= 0) ? true : false;
-	}
+	    return (index < size && index >= 0) ? true : false;
+    }
 
 	/**
 	 * Used to fix the head and tail of the list
@@ -40,7 +46,7 @@ public class DoublyLinkedList<E> implements List<E> {
 	 * If the size of the list is 0 then set head and tail to null
 	 * @param theNode The node to set if its the only one in the list
 	 */
-	private void singleHeadTail(Node2<E> theNode) {
+	private void singleHeadTail(Node<E> theNode) {
 		// if theNode is the only one in the list
 		if (size == 1) {
 			head = theNode;
@@ -58,16 +64,16 @@ public class DoublyLinkedList<E> implements List<E> {
 	 * @param index The index within the list
 	 * @return The node retrieved from the list
 	 */
-	private Node2<E> getNode(int index) {
+    private Node<E> getNode(int index) {
 		// get current head node to start from
-		Node2<E> seekNode = head;
+		Node<E> seekNode = head;
 
 		// seek through the list starting from the head
 		for (int i = 0; i < index; i++) {
 			seekNode = seekNode.getNext();
 		}
 
-		// return the desired Node2 from the list index
+		// return the desired Node from the list index
 		return seekNode;
 	}
 
@@ -96,7 +102,7 @@ public class DoublyLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public E first() {
-		return (head != null) ? head.getData() : null;
+	    return (head != null) ? head.getData() : null;
 	}
 
 	/**
@@ -114,12 +120,12 @@ public class DoublyLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public void addLast(E element) {
-		// check if the element is not null
-		if (checkElement(element)) {
-			// check if the size is at least 1
-			if (!isEmpty()) {
+	    // check if the element is not null
+        if (checkElement(element)) {
+        	// check if the size is at least 1
+        	if (!isEmpty()) {
 				// create the new node
-				Node2<E> lastNode = new Node2<>(element);
+				Node<E> lastNode = new Node<>(element);
 
 				// set its next to be null
 				lastNode.setNext(null);
@@ -133,11 +139,11 @@ public class DoublyLinkedList<E> implements List<E> {
 				// increment size
 				addSize();
 			}
-			// else if size is 0 just add first
-			else {
-				addFirst(element);
+        	// else if size is 0 just add first
+        	else {
+        		addFirst(element);
 			}
-		}
+        }
 	}
 
 	/**
@@ -146,20 +152,20 @@ public class DoublyLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public void addFirst(E element) {
-		// check if the element is not null
-		if (checkElement(element)) {
+        // check if the element is not null
+	    if (checkElement(element)) {
 			// create the new node
-			Node2<E> firstNode = new Node2<>(element);
+			Node<E> firstNode = new Node<>(element);
 
 			// if there is more than one node in the list
-			if (size > 0) {
+	    	if (size > 0) {
 				// make the next of the new node to the original head
 				firstNode.setNext(head);
 			}
-			// else this is the only node in the list
-			else {
-				// there are no other nodes so just have it as null
-				firstNode.setNext(null);
+	    	// else this is the only node in the list
+	    	else {
+	    		// there are no other nodes so just have it as null
+	    		firstNode.setNext(null);
 			}
 
 			// change the head to the new node
@@ -170,7 +176,7 @@ public class DoublyLinkedList<E> implements List<E> {
 
 			// fix the head and tail if single node in list
 			singleHeadTail(firstNode);
-		}
+        }
 	}
 
 	/**
@@ -179,13 +185,13 @@ public class DoublyLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public E removeFirst() {
-		// if the head Node2 is not null
+		// if the head Node is not null
 		if (head != null) {
 			// if there are more than 1 nodes in the list
 			if (size > 1) {
 
 				// keep track of the original head
-				Node2<E> removeNode = head;
+				Node<E> removeNode = head;
 
 				// set the new head to next of original
 				head = removeNode.getNext();
@@ -205,7 +211,7 @@ public class DoublyLinkedList<E> implements List<E> {
 			// else there is only one node in the list to remove
 			else {
 				// make a temp of the current head node
-				Node2<E> removeNode = head;
+				Node<E> removeNode = head;
 
 				// set the list head and tail to null
 				head.setNext(null);
@@ -218,7 +224,7 @@ public class DoublyLinkedList<E> implements List<E> {
 			}
 		}
 
-		// else there is no head Node2
+		// else there is no head Node
 		else {
 			return null;
 		}
@@ -249,8 +255,8 @@ public class DoublyLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public void insert(E element, int index) {
-		// if the element is not null
-		if (checkElement(element)) {
+	    // if the element is not null
+	    if (checkElement(element)) {
 			// if the index is the head
 			if (index == 0) {
 				addFirst(element);
@@ -266,10 +272,10 @@ public class DoublyLinkedList<E> implements List<E> {
 				// check if the index is a usable value
 				if (checkIndex(index)) {
 					// get the node before the one to be added
-					Node2<E> prevNode = getNode(index-1);
+					Node<E> prevNode = getNode(index-1);
 
 					// create the node to be inserted
-					Node2<E> insertNode = new Node2<>(element);
+					Node<E> insertNode = new Node<>(element);
 
 					// set the correct next for the new node
 					insertNode.setNext(prevNode.getNext());
@@ -281,7 +287,7 @@ public class DoublyLinkedList<E> implements List<E> {
 					addSize();
 				}
 			}
-		}
+        }
 	}
 
 	/**
@@ -301,10 +307,10 @@ public class DoublyLinkedList<E> implements List<E> {
 			// else the index is some other node
 			else {
 				// get the node before the one to be removed
-				Node2<E> prevNode = getNode(index-1);
+				Node<E> prevNode = getNode(index-1);
 
 				// get the node that will be removed
-				Node2<E> removeNode = prevNode.getNext();
+				Node<E> removeNode = prevNode.getNext();
 
 				// set the new connection with the node removed
 				prevNode.setNext(removeNode.getNext());
@@ -318,7 +324,7 @@ public class DoublyLinkedList<E> implements List<E> {
 				// fix the head and tail if single node in list
 				singleHeadTail(prevNode);
 
-				// return the removed Node2 data
+				// return the removed Node data
 				return removeNode.getData();
 			}
 		}
@@ -386,7 +392,7 @@ public class DoublyLinkedList<E> implements List<E> {
 		// if there are nodes in the list
 		if (!isEmpty()) {
 			// get the head as the starting point
-			Node2<E> printNode = head;
+			Node<E> printNode = head;
 
 			// iterate though the list, until we reach the end
 			for (int i = 0; i < size; i++) {

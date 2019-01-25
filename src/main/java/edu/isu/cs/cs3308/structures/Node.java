@@ -12,9 +12,6 @@ public class Node<E> {
 	// Data stored in the node.
 	private E data;
 
-	// Stores what the prev node is.
-	private Node<E> prev;
-
 	// Stores what the next node is.
 	private Node<E> next;
 
@@ -45,23 +42,6 @@ public class Node<E> {
 		this.data = data;
 	}
 
-
-	/**
-	 * Get what Node is stored as the prev in the List.
-	 * @return The Node that is currently stored in the prev attribute
-	 */
-	public Node<E> getPrev() {
-		return prev;
-	}
-
-	/**
-	 * Set what Node should be stored as the prev in the List.
-	 * @param prev The Node that should be the previous to current node
-	 */
-	public void setPrev(Node<E> prev) {
-		this.prev = prev;
-	}
-
 	/**
 	 * Get what Node is stored as the next in the List.
 	 * @return The Node that is currently stored in the next attribute
@@ -72,7 +52,7 @@ public class Node<E> {
 
 	/**
 	 * Set what Node should be stored as the next in the List.
-	 * @param next The Node that should be the next to the current node
+	 * @param next The Node that should
 	 */
 	public void setNext(Node<E> next) {
 		this.next = next;
