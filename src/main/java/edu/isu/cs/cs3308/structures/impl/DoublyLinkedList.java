@@ -124,6 +124,9 @@ public class DoublyLinkedList<E> implements List<E> {
 				// set its next to be null
 				lastNode.setNext(null);
 
+				// set previous [difference from SLL]
+				lastNode.setPrev(tail);
+
 				// make the original tail next to the tail to be
 				tail.setNext(lastNode);
 
@@ -155,11 +158,17 @@ public class DoublyLinkedList<E> implements List<E> {
 			if (size > 0) {
 				// make the next of the new node to the original head
 				firstNode.setNext(head);
+
+				// set previous [difference from SLL]
+				firstNode.setPrev(null);
 			}
 			// else this is the only node in the list
 			else {
 				// there are no other nodes so just have it as null
 				firstNode.setNext(null);
+
+				// set previous [difference from SLL]
+				firstNode.setPrev(null);
 			}
 
 			// change the head to the new node
@@ -193,6 +202,9 @@ public class DoublyLinkedList<E> implements List<E> {
 				// remove next of original head
 				removeNode.setNext(null);
 
+				// remove previous [difference from SLL]
+				removeNode.setPrev(null);
+
 				// decrement size
 				subSize();
 
@@ -209,8 +221,9 @@ public class DoublyLinkedList<E> implements List<E> {
 
 				// set the list head and tail to null
 				head.setNext(null);
+				// remove previous [difference from SLL]
+				head.setPrev(null);
 				head = null;
-				tail.setNext(null);
 				tail = null;
 
 				// return the data
@@ -274,6 +287,9 @@ public class DoublyLinkedList<E> implements List<E> {
 					// set the correct next for the new node
 					insertNode.setNext(prevNode.getNext());
 
+					// add previous [difference from SLL]
+					insertNode.setPrev(prevNode);
+
 					// set the correct next for the previous node
 					prevNode.setNext(insertNode);
 
@@ -311,6 +327,9 @@ public class DoublyLinkedList<E> implements List<E> {
 
 				// null out the next of the removeNode
 				removeNode.setNext(null);
+
+				// remove previous [difference from SLL]
+				removeNode.setPrev(null);
 
 				// decrement size
 				subSize();
