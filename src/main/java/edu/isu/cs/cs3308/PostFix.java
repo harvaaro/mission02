@@ -107,46 +107,20 @@ public class PostFix {
 				}
 				// else if too many symbols throw exception
 				else if (countSym > 2) {
-					System.out.println("calcNow:  " + calcNow);
-					System.out.println("postNum:  " + postNum);
-					System.out.println("tempInt:  " + tempInt);
-					System.out.println("countNum: " + countNum);
-					System.out.println("countSym: " + countSym);
-					System.out.println("tempNum1: " + tempNum1);
-					System.out.println("tempNum2: " + tempNum2);
-					System.out.println("tempSym1: " + tempSym1);
-					System.out.println("tempSym2: " + tempSym2);
 					throw new IllegalArgumentException("Too many symbols provided.");
-				}
-				// else if there are too many symbols for the starting set of numbers then throw exception
-				else if (calcNow == true && postNum == -1 && countNum == 2 && countSym == 2) {
-					throw new IllegalArgumentException("Too many symbols for the starting set of numbers.");
-				}
-				// else if not calculating and already have too many of either then throw exception
-//				else if (calcNow == false && postNum != -1 && countNum == 2 && countSym == 2) {
-//					throw new IllegalArgumentException("Too many numbers or symbols provided cannot calculate.");
-//				}
-				// else if there are too many symbols throw exception
-				else if (calcNow == true && postNum != -1 && countNum == 1 && countSym == 2) {
-					throw new IllegalArgumentException("Too many symbols provided for the amount of numbers.");
-				}
-				// else if there are too few symbols throw exception
-				else if (calcNow == true && postNum != -1 && countNum == 2 && countSym == 1) {
-					throw new IllegalArgumentException("Too many numbers provided for the amount of symbols.");
 				}
 				// // SECOND do checks to see if we are ready to calculate:
 				else if ((postNum == -1 && countNum == 2 && countSym == 1 && tempInt != -1) ||
 						(postNum != -1 && countNum == 2 && countSym == 2 && tempInt != -1) ||
 						(postNum != -1 && countNum == 2 && countSym == 1 && tempInt != -1) ||
-						(postNum != -1 && countNum == 1 && countSym == 1 && tempInt != -1)) {
+						(postNum != -1 && countNum == 1 && countSym == 1 && tempInt == -1)) {
 					calcNow = true;
 				}
 				// else we are just incrementing
 				else {
 					if (tempInt > -1) {
 						countNum++;
-					}
-					else {
+					} else {
 						countSym++;
 					}
 				}
