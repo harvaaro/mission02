@@ -45,10 +45,44 @@ public class LinkedStack<E> implements Stack<E> {
 
 	@Override
 	public void reverse() {
+		// create 2 temporary stacks to use for reversing
+		LinkedStack<E> temp1 = new LinkedStack<>();
+		LinkedStack<E> temp2 = new LinkedStack<>();
+
+		// make reverse order in temp1
+		this.transfer(temp1);
+
+		// make normal order in temp2
+		temp1.transfer(temp2);
+
+		// send back to original as reversed
+		temp2.transfer(this);
 	}
 
 	@Override
 	public void merge(Stack<E> other) {
+		if (other != null) {
+			// temporary stacks used for copying from
+			LinkedStack<E> origCopy = new LinkedStack<>();
+			LinkedStack<E> otherCopy = new LinkedStack<>();
+
+			// transfer the 2 stacks for copying from
+			this.transfer(origCopy);
+			other.transfer(otherCopy);
+
+			// copy the stack to merge to other and this
+			while (otherCopy.size() > 0) {
+				// get the element to merge
+				E tempElem = otherCopy.pop();
+
+				// push that element to each stack
+				other.push(tempElem);
+				this.push(tempElem);
+			}
+
+			// now transfer the rest of the original stack
+			origCopy.transfer(this);
+		}
 	}
 
 	@Override
