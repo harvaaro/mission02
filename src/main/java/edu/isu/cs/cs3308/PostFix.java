@@ -29,10 +29,6 @@ public class PostFix {
             // a stack to store all of the separated string values
             LinkedStack<String> valueList = new LinkedStack<>();
 
-            // int value of the calculated output
-            int postNum = 0;
-            // may need a temp num too
-
             // based off of this example will loop and make a stack of the values
             // https://www.tutorialspoint.com/java/java_string_split.htm
             for (String portion: infix.split(" ")) {
@@ -46,12 +42,65 @@ public class PostFix {
             int countNum = 0;
             int countSym = 0;
 
-            // TODO number check first
+            // bool to determine if all values needed are ready for calculation
+            boolean calcNow = false;
+            // int value of the calculated output
+            int postNum = -1;
+
+            // temp values for each calculation
+            int tempNum1 = -1;
+            int tempNum2 = -1;
+
+            // bool to determine if all the calculations are done
+            boolean finished = false;
+
+            // iterate through the stack to do the calculations
+            while (valueList.size() >= 0 && finished == false) {
+                // temp peek of the next value
+                String tempPeek = valueList.peek();
+
+                // check if needed first value is a number otherwise throw exception
+                if (countNum == 0 &&
+                    tempPeek == "+" ||
+                    tempPeek == "-" ||
+                    tempPeek == "*" ||
+                    tempPeek == "/") {
+                    throw new IllegalArgumentException("Number was expected, but got a symbol instead.");
+                }
+                // else if too many numbers throw exception
+                else if (countNum > 2) {
+                    throw new IllegalArgumentException("Too many numbers provided.");
+                }
+                // else if too many symbols throw exception
+                else if (countSym > 2) {
+                    throw new IllegalArgumentException("Too many symbols provided.");
+                }
+                // else if not calculating and already have too many of either then throw exception
+                else if (calcNow == false && postNum != -1 && countNum == 2 && countSym == 2) {
+                    throw new IllegalArgumentException("Too many numbers or symbols provided cannot calculate.");
+                }
+                // else if there are too many symbols throw exception
+                else if (calcNow == true && postNum != -1 && countNum == 1 && countSym == 2) {
+                    throw new IllegalArgumentException("Too many symbols provided for the amount of numbers.");
+                }
+                // else if there are too few symbols throw exception
+                else if (calcNow == true && postNum != -1 && countNum == 2 && countSym == 1) {
+                    throw new IllegalArgumentException("Too many numbers provided for the amount of symbols.");
+                }
+
+                // TODO need to add more checks and then the adding logic
+
+                // if at the end of the stack and did the final calculation then exit the loop
+                if (valueList.size() == 0 && calcNow == true) {
+                    finished = true;
+                }
+                // else we are not done yet so reset calcnow
+                else {
+                    calcNow = false;
+                }
+            }
 
             return postNum;
-
-            // if too few arguments provided for a given operator then throw exception
-//            throw new IllegalArgumentException("Not enough correct arguments provided.");
         }
     }
 }
