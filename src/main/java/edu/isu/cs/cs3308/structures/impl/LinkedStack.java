@@ -34,17 +34,21 @@ public class LinkedStack<E> implements Stack<E> {
 
 	@Override
 	public void transfer(Stack<E> to) {
-
+		// if the stack is not null or empty
+		if (to != null && this.size() > 0) {
+			// loop until all elements are transferred
+			while(this.size() > 0) {
+				to.push(this.pop());
+			}
+		}
 	}
 
 	@Override
 	public void reverse() {
-
 	}
 
 	@Override
 	public void merge(Stack<E> other) {
-
 	}
 
 	@Override
