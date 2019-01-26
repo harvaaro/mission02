@@ -7,31 +7,56 @@ public class LinkedStack<E> implements Stack<E> {
 	// create our DLL to use for the stack
 	DoublyLinkedList<E> theList = new DoublyLinkedList<>();
 
+	/**
+	 * Add a new element onto the stack at the beginning
+	 * @param element data to add to top, unless it is null
+	 */
 	@Override
 	public void push(E element) {
 		theList.addFirst(element);
 	}
 
+	/**
+	 * See the value at the beginning without removing it
+	 * @return The value at the beginning of the stack
+	 */
 	@Override
 	public E peek() {
 		return theList.first();
 	}
 
+	/**
+	 * Remove the value at the beginning of the stack
+	 * @return The value at the beginning of the stack
+	 */
 	@Override
 	public E pop() {
 		return theList.removeFirst();
 	}
 
+	/**
+	 * Get how many elements are in the stack
+	 * @return Number of elements in stack
+	 */
 	@Override
 	public int size() {
 		return theList.size();
 	}
 
+	/**
+	 * Determine if the stack list is empty or not
+	 * @return True if the stack list is empty, else is false
+	 */
 	@Override
 	public boolean isEmpty() {
 		return theList.isEmpty();
 	}
 
+	/**
+	 * Transfer all the data from one stack to another,
+	 * this also reverses the order of the elements
+	 * @param to The stack to transfer to unless it is null
+	 */
 	@Override
 	public void transfer(Stack<E> to) {
 		// if the stack is not null or empty
@@ -43,6 +68,9 @@ public class LinkedStack<E> implements Stack<E> {
 		}
 	}
 
+	/**
+	 *Reverse the order of the elements of the current stack
+	 */
 	@Override
 	public void reverse() {
 		// create 2 temporary stacks to use for reversing
@@ -59,6 +87,11 @@ public class LinkedStack<E> implements Stack<E> {
 		temp2.transfer(this);
 	}
 
+	/**
+	 * Copy the other stack to the end of the this stack.
+	 * @param other Stack whose contents are to be merged
+	 * onto the bottom of this stack.
+	 */
 	@Override
 	public void merge(Stack<E> other) {
 		if (other != null) {
@@ -85,6 +118,9 @@ public class LinkedStack<E> implements Stack<E> {
 		}
 	}
 
+	/**
+	 * Prints out the content of the stack list
+	 */
 	@Override
 	public void printStack() {
 		theList.printList();

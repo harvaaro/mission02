@@ -219,6 +219,15 @@ public class SinglyLinkedList<E> implements List<E> {
 				tail.setNext(null);
 				tail = null;
 
+				// [different from SLL that was uploaded]
+				// fixed this to subtract correctly
+				// noticed this missing from the DLL version
+				// decrement size
+				subSize();
+
+				// fix the head and tail if single node in list
+				singleHeadTail(head);
+
 				// return the data
 				return removeNode.getData();
 			}
