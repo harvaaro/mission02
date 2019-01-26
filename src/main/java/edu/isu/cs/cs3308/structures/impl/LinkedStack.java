@@ -4,29 +4,32 @@ import edu.isu.cs.cs3308.structures.Stack;
 
 public class LinkedStack<E> implements Stack<E> {
 
+	// create our DLL to use for the stack
+	DoublyLinkedList<E> theList = new DoublyLinkedList<>();
+
 	@Override
 	public void push(E element) {
-
+		theList.addFirst(element);
 	}
 
 	@Override
 	public E peek() {
-		return null;
+		return theList.first();
 	}
 
 	@Override
 	public E pop() {
-		return null;
+		return theList.removeFirst();
 	}
 
 	@Override
 	public int size() {
-		return 0;
+		return theList.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return false;
+		return theList.isEmpty();
 	}
 
 	@Override
@@ -46,6 +49,6 @@ public class LinkedStack<E> implements Stack<E> {
 
 	@Override
 	public void printStack() {
-
+		theList.printList();
 	}
 }

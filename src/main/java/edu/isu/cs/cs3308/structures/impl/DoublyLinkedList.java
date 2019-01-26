@@ -226,6 +226,12 @@ public class DoublyLinkedList<E> implements List<E> {
 				head = null;
 				tail = null;
 
+				// decrement size
+				subSize();
+
+				// fix the head and tail if single node in list
+				singleHeadTail(head);
+
 				// return the data
 				return removeNode.getData();
 			}
