@@ -63,12 +63,17 @@ public class PostFix {
 				int tempInt = -1;
 
 				// ensure we can get a value from the stack
-				if (valueList.size() > 0) {
+				if (valueList.size() > 0 && calcNow == false) {
 					// temp peek of the next value
 					tempPeek = valueList.peek();
 
-					// int of the temppeek
-					tempInt = Integer.parseInt(tempPeek);
+					if (	!tempPeek.equals("+") &&
+							!tempPeek.equals("-") &&
+							!tempPeek.equals("*") &&
+							!tempPeek.equals("/")) {
+						// int of the temppeek
+						tempInt = Integer.parseInt(tempPeek);
+					}
 
 					// assigns values if the count is high enough
 					if (tempInt > -1) {
@@ -90,15 +95,22 @@ public class PostFix {
 
 				// // FRIST do checks to see if there is an invalid set of arguments:
 				// check if needed first value is a number otherwise throw exception
-				if (countNum == 0 &&
-					tempPeek == "+" ||
-					tempPeek == "-" ||
-					tempPeek == "*" ||
-					tempPeek == "/") {
+				if (	countNum == 0 &&
+						tempPeek.equals("+") ||
+						tempPeek.equals("-") ||
+						tempPeek.equals("*") ||
+						tempPeek.equals("/")) {
 					throw new IllegalArgumentException("Number was expected, but got a symbol instead.");
 				}
 				// else if too many numbers throw exception
 				else if (countNum > 2) {
+					System.out.println("calcNow:  " + calcNow);
+					System.out.println("countNum: " + countNum);
+					System.out.println("countSym: " + countSym);
+					System.out.println("tempNum1: " + tempNum1);
+					System.out.println("tempNum2: " + tempNum2);
+					System.out.println("tempSym1: " + tempSym1);
+					System.out.println("tempSym2: " + tempSym2);
 					throw new IllegalArgumentException("Too many numbers provided.");
 				}
 				// else if too many symbols throw exception
@@ -125,8 +137,7 @@ public class PostFix {
 				else if ((postNum == -1 && countNum == 2 && countSym == 1 && tempInt != -1) ||
 						(postNum != -1 && countNum == 2 && countSym == 2 && tempInt != -1) ||
 						(postNum != -1 && countNum == 2 && countSym == 1 && tempInt != -1) ||
-						(postNum != -1 && countNum == 1 && countSym == 1 && tempInt != -1)
-				) {
+						(postNum != -1 && countNum == 1 && countSym == 1 && tempInt != -1)) {
 					calcNow = true;
 				}
 				// // THIRD calculate the needed post number
@@ -137,13 +148,13 @@ public class PostFix {
 					// for calculations with 2 numbers
 					if (countNum == 2) {
 						// do the appropriate calculate for the
-						if (tempSym1 == "+") {
+						if (tempSym1.equals("+")) {
 							comboNum = (tempNum1 + tempNum2);
-						} else if (tempSym1 == "-") {
+						} else if (tempSym1.equals("-")) {
 							comboNum = (tempNum1 - tempNum2);
-						} else if (tempSym1 == "*") {
+						} else if (tempSym1.equals("*")) {
 							comboNum = (tempNum1 * tempNum2);
-						} else if (tempSym1 == "/") {
+						} else if (tempSym1.equals("/")) {
 							comboNum = (tempNum1 / tempNum2);
 						}
 
@@ -152,13 +163,13 @@ public class PostFix {
 							postNum = comboNum;
 						} else if (countSym == 2) {
 							// do the appropriate calculate for the
-							if (tempSym2 == "+") {
+							if (tempSym2.equals("+")) {
 								postNum += comboNum;
-							} else if (tempSym2 == "-") {
+							} else if (tempSym2.equals("-")) {
 								postNum -= comboNum;
-							} else if (tempSym2 == "*") {
+							} else if (tempSym2.equals("*")) {
 								postNum *= comboNum;
-							} else if (tempSym2 == "/") {
+							} else if (tempSym2.equals("/")) {
 								postNum /= comboNum;
 							}
 						}
@@ -166,13 +177,13 @@ public class PostFix {
 					// else we are at the end of the stack
 					else if (countNum == 1) {
 						// do the appropriate calculate for the
-						if (tempSym1 == "+") {
+						if (tempSym1.equals("+")) {
 							postNum += tempNum1;
-						} else if (tempSym1 == "-") {
+						} else if (tempSym1.equals("-")) {
 							postNum -= tempNum1;
-						} else if (tempSym1 == "*") {
+						} else if (tempSym1.equals("*")) {
 							postNum *= tempNum1;
-						} else if (tempSym1 == "/") {
+						} else if (tempSym1.equals("/")) {
 							postNum /= tempNum1;
 						}
 					}
