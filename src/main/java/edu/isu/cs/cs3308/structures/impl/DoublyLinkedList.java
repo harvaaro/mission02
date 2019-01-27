@@ -3,6 +3,12 @@ package edu.isu.cs.cs3308.structures.impl;
 import edu.isu.cs.cs3308.structures.List;
 import edu.isu.cs.cs3308.structures.Node2;
 
+/**
+ * Is like a Singly linked list, but with a prev node direction too
+ *
+ * @author Aaron Harvey
+ * @param <E> any type of list
+ */
 public class DoublyLinkedList<E> implements List<E> {
 
 	// Head node for the List

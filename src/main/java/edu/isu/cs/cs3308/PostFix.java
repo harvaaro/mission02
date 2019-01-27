@@ -6,6 +6,7 @@ import edu.isu.cs.cs3308.structures.impl.LinkedStack;
  * Postfix expression evaluator.
  *
  * @author Isaac Griffith
+ * @author Aaron Harvey
  */
 public class PostFix {
 

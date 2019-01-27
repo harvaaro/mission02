@@ -2,6 +2,12 @@ package edu.isu.cs.cs3308.structures.impl;
 
 import edu.isu.cs.cs3308.structures.Stack;
 
+/**
+ * A linked stack that is based off of a Doubly Linked List
+ *
+ * @author Aaron Harvey
+ * @param <E> any type of stack
+ */
 public class LinkedStack<E> implements Stack<E> {
 
 	// create our DLL to use for the stack
